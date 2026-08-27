@@ -479,6 +479,7 @@ const MESES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov"
 const COLORS = ['#4361EE','#00A87E','#FF5A5F','#C98A3E','#8A6FD4','#00BFC9','#D44A9E','#9A9A50'];
 
 async function cargarDatos(){
+  data = { categoriasGasto: [], categoriasIngreso: [], movimientos: [], recurrentes: [], metas: [] };
   try{
     const remoto = await window.firebaseCargar();
     if(remoto){ data = Object.assign(data, remoto); }
@@ -494,6 +495,9 @@ async function cargarDatos(){
     ];
     data.categoriasIngreso = ["Sueldo"];
   }
+  editandoId = null;
+  filtroMes = mesActualKey();
+  verTodoActivo = false;
   render();
 }
 async function guardarDatos(){
